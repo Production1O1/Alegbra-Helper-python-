@@ -1,0 +1,52 @@
+#This first part of my code will be a basic calculator that will review my concepts and transition into the harder stuff easier. 
+
+import math 
+
+print("Welcome to the Basic Arithmetics calculator!")
+while True: 
+    print("OPERATIONS/CHOICES: --------------------------")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Exponentiation (includes square roots and negative roots)")
+    print("6. Fraction Operations (and percentages)")
+    print("7. exit")
+    try:
+        user_choice = int(input("Please select a choice from the above (1-7): "))
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        continue
+    if user_choice == 7: 
+        print("Exiting the calculator. Goodbye!")
+        break
+    elif user_choice < 1 or user_choice > 7:
+        print("Invalid choice. Please select a valid option.")
+        continue
+    elif type(user_choice) != int:
+        print("Invalid input. Please enter a number.")
+        continue
+    elif user_choice == 1: 
+        #Here is the thought: we use for loop to ask how many numbers to add, and add them to sum. The current sum at end of for loop replaces the current value! 
+        try:
+            sum=0
+            times_sum = int(input("How many numbers would you like to add? "))
+            for i in range(times_sum):
+                num = float(input(f"Enter number {i + 1}: "))
+                sum = sum + num
+        except ValueError:
+            print("Invalid input. Please enter a number next time. ")
+            sum = 0 
+            continue
+        print(f"The sum of the numbers is: {sum}. ")
+
+    elif user_choice == 2: 
+        pass
+    elif user_choice == 3: 
+        pass
+    elif user_choice == 4: 
+        pass
+    elif user_choice == 5: 
+        pass
+    elif user_choice == 6: 
+        pass
