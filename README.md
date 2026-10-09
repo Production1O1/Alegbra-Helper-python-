@@ -1,2 +1,6 @@
 # Alegbra-Helper-python-
 This will be my first major python code that solves algebra stuff (slope, equations, systems, graphs, etc.) It will try to be designed user friendly! 
+It will have lots of imports (especially to make the code more efficient-- trying to manually make a code that solves for variables sounds extremely hard, annoying, and chances are it wont even work). I can use these wonderful modules to my advantage! 
+There will be a huge emphasis on making it user friendly! I've noticed myself that calculators are a bit hard to use-- and you often need tutorials! The goal with my code is that its more user friendly (and you don't need a tutorial) and it can perform more things. This means though that there will be a lot of try and excepts since the user could possibly type an invalid input (and we don't want the code to have an error/stop unless the user stops it on PURPOSE) 
+One thing that may happen is importing the turtle module so the user can see graphs, though I am very unfamiliar with this module (so likely not.) 
+Thanks for reading this overview, and one thing I love about this project is that as I keep learning more things, I can keep updating and improving this project/code! Stick by to see the final! 
