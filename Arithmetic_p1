@@ -1,16 +1,21 @@
 #This first part of my code will be a basic calculator that will review my concepts and transition into the harder stuff easier. 
 
+#IMPORTS! 
 import math 
+import time
+import fractions
+#CODE BELOW! 
 
 print("Welcome to the Basic Arithmetics calculator!")
 while True: 
+    time.sleep(3)
     print("OPERATIONS/CHOICES: --------------------------")
     print("1. Addition")
     print("2. Subtraction")
     print("3. Multiplication")
     print("4. Division")
     print("5. Exponentiation (includes square roots and negative roots)")
-    print("6. Fraction Operations (and percentages)")
+    print("6. Fraction Operations")
     print("7. exit")
     try:
         user_choice = int(input("Please select a choice from the above (1-7): "))
@@ -41,12 +46,181 @@ while True:
         print(f"The sum of the numbers is: {sum}. ")
 
     elif user_choice == 2: 
-        pass
+        #Similar to addition, except we ask for a starting number (the minuend) and subract the numbers (ask how many!)
+        try:
+            minuend = float(input("Enter the starting number (minuend): "))
+            times_subtract = int(input("How many numbers would you like to subtract? "))
+            for i in range(times_subtract):
+                num = float(input(f"Enter number {i + 1} to subtract: "))
+                minuend = minuend - num
+        except ValueError:
+            print("Invalid input. Please enter a number next time. ")
+            minuend = 0
+            continue
+        print(f"The result of the subtraction is: {minuend}. ")
     elif user_choice == 3: 
-        pass
+        #Similar to addition, except we ask for a starting number (the multiplicand) and multiply it by the numbers (ask how many!)
+        try:
+            multiplicand = float(input("Enter the starting number (multiplicand): "))
+            times_multiply = int(input("How many numbers would you like to multiply? "))
+            for i in range(times_multiply):
+                num = float(input(f"Enter number {i + 1} to multiply: "))
+                multiplicand = multiplicand * num
+        except ValueError:
+            print("Invalid input. Please enter a number next time. ")
+            multiplicand = 0
+            continue
+        print(f"The result of the multiplication is: {multiplicand}. ")
     elif user_choice == 4: 
-        pass
+        #Similar to addition, except we ask for a starting number (the dividend) and divide it by the numbers (ask how many!)
+        try:
+            dividend = float(input("Enter the starting number (dividend): "))
+            times_divide = int(input("How many numbers would you like to divide by? "))
+            for i in range(times_divide):
+                num = float(input(f"Enter number {i + 1} to divide by: "))
+                if num == 0:
+                    print("Cannot divide by zero. Please enter a non-zero number.")
+                    continue
+                dividend = dividend / num
+        except ValueError:
+            print("Invalid input. Please enter a number next time. ")
+            dividend = 0
+            continue
+        print(f"The result of the division is: {dividend}. ")
     elif user_choice == 5: 
-        pass
+        try: 
+            number = int(input("How many times will you raise the base to a power? "))
+            base = float(input("Enter the base: "))
+            result = base
+            for i in range(number):
+                exponent = float(input("Enter the exponent: "))
+                result = result ** exponent 
+        except ZeroDivisionError:
+            print("Cannot raise to a negative power with a zero base. Please enter valid numbers.")
+            result = 0
+            continue
+        except ValueError:
+            print("Invalid input. Please enter a number next time. ")
+            result = 0
+            continue
+        print(f"The result is: {result}")
+    
     elif user_choice == 6: 
-        pass
+        print("Options for fractions: -----------")
+        print("1. Add fractions")
+        print("2. Subtract fractions")
+        print("3. Multiply fractions")
+        print("4. Divide fractions")
+        print("5. Exponentiation with fractions ")
+        try:
+            option_fracs = int(input("Select an option for fractions (1-5): "))
+            if option_fracs == 1:
+                # Add fractions
+                try:
+                    number = int(input("How many times will you add the fractions? "))
+                    sum = 0
+                    type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                    for i in range(number):
+                        val = fractions.Fraction(input("Fraction: "))
+                        sum = sum+val 
+                    if type_of_ans == "f":
+                        print(f"The sum of the fractions is: {sum}")
+                    elif type_of_ans == "d":
+                        print(f"The sum of the fractions is: {float(sum)}")
+                    else:
+                        print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                        print(f"The sum of the fractions is: {sum}")
+                except ValueError:
+                    print("Invalid input. Please enter numbers next time.")
+                except ZeroDivisionError:
+                    print("Invalid input. Please enter a non-zero denominator next time.")
+            elif option_fracs == 2:
+                # Subtract fractions
+                try:
+                    number = int(input("How many times will you subtract the fractions? "))
+                    type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                    result = fractions.Fraction(input("Starting fraction (minuend): "))
+                    for i in range(number):
+                        val = fractions.Fraction(input("Fraction: "))
+                        result = result - val 
+                    if type_of_ans == "f":
+                        print(f"The result of the subtraction is: {result}")
+                    elif type_of_ans == "d":
+                        print(f"The result of the subtraction is: {float(result)}")
+                    else:
+                        print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                        print(f"The result of the subtraction is: {result}")
+                except ValueError:
+                    print("Invalid input. Please enter numbers next time.")
+                except ZeroDivisionError:
+                    print("Invalid input. Please enter a non-zero denominator next time.")
+            elif option_fracs == 3:
+                # Multiply fractions
+                try:
+                    number = int(input("How many times will you multiply the fractions? "))
+                    type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                    result = fractions.Fraction(input("Starting fraction (multiplicand): "))
+                    for i in range(number):
+                        val = fractions.Fraction(input("Fraction: "))
+                        result = result * val 
+                    if type_of_ans == "f":
+                        print(f"The result of the multiplication is: {result}")
+                    elif type_of_ans == "d":
+                        print(f"The result of the multiplication is: {float(result)}")
+                    else:
+                        print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                        print(f"The result of the multiplication is: {result}")
+                except ValueError:
+                    print("Invalid input. Please enter numbers next time.")
+                except ZeroDivisionError:
+                    print("Invalid input. Please enter a non-zero denominator next time.")
+            elif option_fracs == 4:
+                # Divide fractions
+                try:
+                    number = int(input("How many times will you divide the fractions? "))
+                    type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                    result = fractions.Fraction(input("Starting fraction (dividend): "))
+                    for i in range(number):
+                        val = fractions.Fraction(input("Fraction: "))
+                        result = result / val 
+                    if type_of_ans == "f":
+                        print(f"The result of the division is: {result}")
+                    elif type_of_ans == "d":
+                        print(f"The result of the division is: {float(result)}")
+                    else:
+                        print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                        print(f"The result of the division is: {result}")
+                except ValueError:
+                    print("Invalid input. Please enter numbers next time.")
+                except ZeroDivisionError:
+                    print("Invalid input. Please enter a non-zero denominator next time.")
+            elif option_fracs == 5:
+                # Power of fractions
+                try:
+                    number = int(input("How many times will you raise the fraction to a power? "))
+                    type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                    result = fractions.Fraction(input("Starting fraction (base): "))
+                    for i in range(number):
+                        val = fractions.Fraction(input("Exponent: "))
+                        result = result ** val 
+                    if type_of_ans == "f":
+                        print(f"The result of the power is: {result}")
+                    elif type_of_ans == "d":
+                        print(f"The result of the power is: {float(result)}")
+                    else:
+                        print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                        print(f"The result of the power is: {result}")
+                except ValueError:
+                    print("Invalid input. Please enter numbers next time.")
+                except ZeroDivisionError:
+                    print("Invalid input. The answer is UNDEFINED.")
+                except OverflowError:
+                    print("The result is too large to represent.")
+            else: 
+                print("Invalid input. Your choice was not recognized.")
+        except ValueError: 
+            print("Invalid input. Please enter numbers next time.")
+    else: 
+        print("That was not an option. Please select a valid choice!")
+
+#This part of the code works amazingly! We will move on to the next section! THIS IS FINISHED!
