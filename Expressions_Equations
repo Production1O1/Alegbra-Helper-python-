@@ -1,0 +1,64 @@
+#Hey! This was added inside of linear_p2, and that will be added to the FINAL calculator... If you're aware, I'm estimating ~1000+ lines of code easily!! 
+import math
+import time
+import fractions
+from turtle import left
+import sympy as sp
+from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
+
+
+while True: 
+    print("welcome to Expressions and Equations! Please select an option...")
+    print("1. Simplify expressions--LINEAR")
+    print("2. Expand expressions--LINEAR")
+    print("3. Solve equations--LINEAR")
+    print("4. Exit")
+    try: 
+        choice = input("Enter your choice: ")
+        if choice == "4":
+            break
+        elif choice == "1":
+            #currently learning how to simplify expressions on this! 
+            
+            expr = input("Enter your expression: ")
+            expr = expr.replace("^", "**")
+            transformations = standard_transformations + (implicit_multiplication_application,)
+            expression = parse_expr(expr, transformations=transformations)
+            simplified = sp.simplify(expression)
+            print("Simplified expression:", str(simplified).replace("**", "^").replace("*", ""))
+            #print("Simplified expression:", str(simplified).replace("**", "^").replace("*", ""))
+        
+        elif choice == "2":
+            
+            expr = input("Enter your expression: ")
+            expr = expr.replace("^", "**")
+            transformations = standard_transformations + (implicit_multiplication_application,)
+            expression = parse_expr(expr, transformations=transformations)
+            simplified = sp.expand(expression)
+            print("expanded expression:", str(simplified).replace("**", "^").replace("*", ""))
+            #print("Simplified expression:", str(simplified).replace("**", "^").replace("*", ""))
+        elif choice == "3":
+            var =input("What is the variable in your equation: ")
+            equation = input("Enter your equation (must have = sign): ")
+            equation = equation.replace("^", "**")
+            if "=" not in equation:
+                print("Equation must contain an '=' sign.")
+                continue
+            left, right = equation.split("=", 1)
+            transformations = standard_transformations + (implicit_multiplication_application,)
+            local_symbols = {var: sp.Symbol(var)}
+            left_expr = parse_expr(left, local_dict=local_symbols, transformations=transformations)
+            right_expr = parse_expr(right, local_dict=local_symbols, transformations=transformations)
+            solution = sp.solve(sp.Eq(left_expr, right_expr), sp.Symbol(var))
+            print("Solution:", solution)
+            
+            #left_expr = parse_expr(left,
+            #local_dict=local_symbols,
+            #transformations=transformations)
+
+        else:
+            print("Invalid choice, please try again.")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        time.sleep(3)
