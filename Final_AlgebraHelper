@@ -1,0 +1,824 @@
+#The intro code to this calc! 
+
+import time
+import math 
+import random 
+import fractions
+
+print("Welcome to the Algebra Helper! Yes, this is a calculator, but its VERY user friendly. It is constantly being updated, and will try to be broad with its capabilities (but no guarantees!)")
+while True: 
+    print("ALGEBRA!--------------------")
+    print("What would you like to do? List of commands below!")
+    print("""1. Basic Arithmetics Calculator 
+2. Linear Equations Calculator
+3. Non-linear Equations Calculator
+4. Algebra 2 Extra Calculator
+5. Extra Calculator 
+6. QUIT """)
+    the_choice = input("Enter your choice: ")
+    if the_choice == "6":
+        print("Thank you for using the Algebra Helper! Goodbye!")
+        break
+    elif the_choice == "1":
+        print("Welcome to the Basic Arithmetics calculator!")
+        while True: 
+            time.sleep(3)
+            print("OPERATIONS/CHOICES: --------------------------")
+            print("1. Addition")
+            print("2. Subtraction")
+            print("3. Multiplication")
+            print("4. Division")
+            print("5. Exponentiation (includes square roots and negative roots)")
+            print("6. Fraction Operations")
+            print("7. exit")
+            try:
+                user_choice = int(input("Please select a choice from the above (1-7): "))
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+                continue
+            if user_choice == 7: 
+                print("Exiting the calculator. Goodbye!")
+                break
+            elif user_choice < 1 or user_choice > 7:
+                print("Invalid choice. Please select a valid option.")
+                continue
+            elif type(user_choice) != int:
+                print("Invalid input. Please enter a number.")
+                continue
+            elif user_choice == 1: 
+                #Here is the thought: we use for loop to ask how many numbers to add, and add them to sum. The current sum at end of for loop replaces the current value! 
+                try:
+                    sum=0
+                    times_sum = int(input("How many numbers would you like to add? "))
+                    for i in range(times_sum):
+                        num = float(input(f"Enter number {i + 1}: "))
+                        sum = sum + num
+                except ValueError:
+                    print("Invalid input. Please enter a number next time. ")
+                    sum = 0 
+                    continue
+                print(f"The sum of the numbers is: {sum}. ")
+
+            elif user_choice == 2: 
+                #Similar to addition, except we ask for a starting number (the minuend) and subract the numbers (ask how many!)
+                try:
+                    minuend = float(input("Enter the starting number (minuend): "))
+                    times_subtract = int(input("How many numbers would you like to subtract? "))
+                    for i in range(times_subtract):
+                        num = float(input(f"Enter number {i + 1} to subtract: "))
+                        minuend = minuend - num
+                except ValueError:
+                    print("Invalid input. Please enter a number next time. ")
+                    minuend = 0
+                    continue
+                print(f"The result of the subtraction is: {minuend}. ")
+            elif user_choice == 3: 
+                #Similar to addition, except we ask for a starting number (the multiplicand) and multiply it by the numbers (ask how many!)
+                try:
+                    multiplicand = float(input("Enter the starting number (multiplicand): "))
+                    times_multiply = int(input("How many numbers would you like to multiply? "))
+                    for i in range(times_multiply):
+                        num = float(input(f"Enter number {i + 1} to multiply: "))
+                        multiplicand = multiplicand * num
+                except ValueError:
+                    print("Invalid input. Please enter a number next time. ")
+                    multiplicand = 0
+                    continue
+                print(f"The result of the multiplication is: {multiplicand}. ")
+            elif user_choice == 4: 
+                #Similar to addition, except we ask for a starting number (the dividend) and divide it by the numbers (ask how many!)
+                try:
+                    dividend = float(input("Enter the starting number (dividend): "))
+                    times_divide = int(input("How many numbers would you like to divide by? "))
+                    for i in range(times_divide):
+                        num = float(input(f"Enter number {i + 1} to divide by: "))
+                        if num == 0:
+                            print("Cannot divide by zero. Please enter a non-zero number.")
+                            continue
+                        dividend = dividend / num
+                except ValueError:
+                    print("Invalid input. Please enter a number next time. ")
+                    dividend = 0
+                    continue
+                print(f"The result of the division is: {dividend}. ")
+            elif user_choice == 5: 
+                try: 
+                    number = int(input("How many times will you raise the base to a power? "))
+                    base = float(input("Enter the base: "))
+                    result = base
+                    for i in range(number):
+                        exponent = float(input("Enter the exponent: "))
+                        result = result ** exponent 
+                except ZeroDivisionError:
+                    print("Cannot raise to a negative power with a zero base. Please enter valid numbers.")
+                    result = 0
+                    continue
+                except ValueError:
+                    print("Invalid input. Please enter a number next time. ")
+                    result = 0
+                    continue
+                print(f"The result is: {result}")
+
+            elif user_choice == 6: 
+                print("Options for fractions: -----------")
+                print("1. Add fractions")
+                print("2. Subtract fractions")
+                print("3. Multiply fractions")
+                print("4. Divide fractions")
+                print("5. Exponentiation with fractions ")
+                try:
+                    option_fracs = int(input("Select an option for fractions (1-5): "))
+                    if option_fracs == 1:
+                        # Add fractions
+                        try:
+                            number = int(input("How many times will you add the fractions? "))
+                            sum = 0
+                            type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                            for i in range(number):
+                                val = fractions.Fraction(input("Fraction: "))
+                                sum = sum+val 
+                            if type_of_ans == "f":
+                                print(f"The sum of the fractions is: {sum}")
+                            elif type_of_ans == "d":
+                                print(f"The sum of the fractions is: {float(sum)}")
+                            else:
+                                print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                                print(f"The sum of the fractions is: {sum}")
+                        except ValueError:
+                            print("Invalid input. Please enter numbers next time.")
+                        except ZeroDivisionError:
+                            print("Invalid input. Please enter a non-zero denominator next time.")
+                    elif option_fracs == 2:
+                        # Subtract fractions
+                        try:
+                            number = int(input("How many times will you subtract the fractions? "))
+                            type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                            result = fractions.Fraction(input("Starting fraction (minuend): "))
+                            for i in range(number):
+                                val = fractions.Fraction(input("Fraction: "))
+                                result = result - val 
+                            if type_of_ans == "f":
+                                print(f"The result of the subtraction is: {result}")
+                            elif type_of_ans == "d":
+                                print(f"The result of the subtraction is: {float(result)}")
+                            else:
+                                print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                                print(f"The result of the subtraction is: {result}")
+                        except ValueError:
+                            print("Invalid input. Please enter numbers next time.")
+                        except ZeroDivisionError:
+                            print("Invalid input. Please enter a non-zero denominator next time.")
+                    elif option_fracs == 3:
+                        # Multiply fractions
+                        try:
+                            number = int(input("How many times will you multiply the fractions? "))
+                            type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                            result = fractions.Fraction(input("Starting fraction (multiplicand): "))
+                            for i in range(number):
+                                val = fractions.Fraction(input("Fraction: "))
+                                result = result * val 
+                            if type_of_ans == "f":
+                                print(f"The result of the multiplication is: {result}")
+                            elif type_of_ans == "d":
+                                print(f"The result of the multiplication is: {float(result)}")
+                            else:
+                                print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                                print(f"The result of the multiplication is: {result}")
+                        except ValueError:
+                            print("Invalid input. Please enter numbers next time.")
+                        except ZeroDivisionError:
+                            print("Invalid input. Please enter a non-zero denominator next time.")
+                    elif option_fracs == 4:
+                        # Divide fractions
+                        try:
+                            number = int(input("How many times will you divide the fractions? "))
+                            type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                            result = fractions.Fraction(input("Starting fraction (dividend): "))
+                            for i in range(number):
+                                val = fractions.Fraction(input("Fraction: "))
+                                result = result / val 
+                            if type_of_ans == "f":
+                                print(f"The result of the division is: {result}")
+                            elif type_of_ans == "d":
+                                print(f"The result of the division is: {float(result)}")
+                            else:
+                                print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                                print(f"The result of the division is: {result}")
+                        except ValueError:
+                            print("Invalid input. Please enter numbers next time.")
+                        except ZeroDivisionError:
+                            print("Invalid input. Please enter a non-zero denominator next time.")
+                    elif option_fracs == 5:
+                        # Power of fractions
+                        try:
+                            number = int(input("How many times will you raise the fraction to a power? "))
+                            type_of_ans = input("Do you want the answer as a fraction or decimal? (f/d): ").lower()
+                            result = fractions.Fraction(input("Starting fraction (base): "))
+                            for i in range(number):
+                                val = fractions.Fraction(input("Exponent: "))
+                                result = result ** val 
+                            if type_of_ans == "f":
+                                print(f"The result of the power is: {result}")
+                            elif type_of_ans == "d":
+                                print(f"The result of the power is: {float(result)}")
+                            else:
+                                print("You did not specify properly how you wanted your answer! The below is a fraction in simplest form.")
+                                print(f"The result of the power is: {result}")
+                        except ValueError:
+                            print("Invalid input. Please enter numbers next time.")
+                        except ZeroDivisionError:
+                            print("Invalid input. The answer is UNDEFINED.")
+                        except OverflowError:
+                            print("The result is too large to represent.")
+                    else: 
+                        print("Invalid input. Your choice was not recognized.")
+                except ValueError: 
+                    print("Invalid input. Please enter numbers next time.")
+            else: 
+                print("That was not an option. Please select a valid choice!")
+
+    elif the_choice == "2":
+        
+
+        import sympy as sp
+        from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application
+        import ast
+
+        # imports coming (Will research all the ones needed!)
+        print("Welcome to the Linear calculator!")
+        while True:
+            time.sleep(3)
+            print("CHOICES: ------------------------------")
+            print("1. Expressions and equations")
+            print("2. Linear equations")
+            print("3. regression")
+            print("4. Systems of Equations")
+            print("5. exit")
+            try:
+                choice = input("Enter your choice: ")
+                if choice == "5":
+                    break
+                elif choice == "1":
+                    while True: 
+                        print("welcome to Expressions and Equations! Please select an option...")
+                        print("1. Simplify expressions--LINEAR")
+                        print("2. Expand expressions--LINEAR")
+                        print("3. Solve equations--LINEAR")
+                        print("4. Exit")
+                        try: 
+                            choice = input("Enter your choice: ")
+                            if choice == "4":
+                                break
+                            elif choice == "1":
+                                #currently learning how to simplify expressions on this! 
+                                
+                                expr = input("Enter your expression: ")
+                                expr = expr.replace("^", "**")
+                                transformations = standard_transformations + (implicit_multiplication_application,)
+                                expression = parse_expr(expr, transformations=transformations)
+                                simplified = sp.simplify(expression)
+                                print("Simplified expression:", str(simplified).replace("**", "^").replace("*", ""))
+                                #print("Simplified expression:", str(simplified).replace("**", "^").replace("*", ""))
+                            
+                            elif choice == "2":
+                                
+                                expr = input("Enter your expression: ")
+                                expr = expr.replace("^", "**")
+                                transformations = standard_transformations + (implicit_multiplication_application,)
+                                expression = parse_expr(expr, transformations=transformations)
+                                simplified = sp.expand(expression)
+                                print("expanded expression:", str(simplified).replace("**", "^").replace("*", ""))
+                                #print("Simplified expression:", str(simplified).replace("**", "^").replace("*", ""))
+                            elif choice == "3":
+                                var =input("What is the variable in your equation: ")
+                                equation = input("Enter your equation (must have = sign): ")
+                                equation = equation.replace("^", "**")
+                                if "=" not in equation:
+                                    print("Equation must contain an '=' sign.")
+                                    continue
+                                left, right = equation.split("=", 1)
+                                transformations = standard_transformations + (implicit_multiplication_application,)
+                                local_symbols = {var: sp.Symbol(var)}
+                                left_expr = parse_expr(left, local_dict=local_symbols, transformations=transformations)
+                                right_expr = parse_expr(right, local_dict=local_symbols, transformations=transformations)
+                                solution = sp.solve(sp.Eq(left_expr, right_expr), sp.Symbol(var))
+                                print("Solution:", solution)
+                                
+                                #left_expr = parse_expr(left,
+                                #local_dict=local_symbols,
+                                #transformations=transformations)
+
+                            else:
+                                print("Invalid choice, please try again.")
+
+                        except Exception as e:
+                            print(f"An error occurred: {e}")
+                            time.sleep(3)
+                elif choice == "2":
+                #Hey! what imports needa be done? will be researched. 
+                    print("Welcome to LINEAR Equations!")
+                    while True: 
+                        time.sleep(4)
+                        print("Please select an option...")
+                        print("1. Find the slope between 2 points")
+                        print("2. Find the equation of a line given 2 points")
+                        print("3. Identify features given some equation")
+                        print("4. Convert between forms")
+                        print("5. Find output given input")
+                        print("6. Find input given output")
+                        print("7. Distance between two parallel lines")
+                        print("8. Determine whether lines are perpendicular, parallel, or neither ")
+                        print("9. Exit")
+                        try:
+                            choice = input("Enter your choice: ")
+                            if choice == "9":
+                                break
+                            elif choice == "1":
+                                slope_choice = input("This is the slope finder! Type 1 if you want to type your coordinates as an ordered pair: ")
+                                if slope_choice == "1": 
+                                    point1 = ast.literal_eval(input("Enter first point (x,y): "))
+                                    point2 = ast.literal_eval(input("Enter second point (x1,y1): "))
+                                    if point1[0] == point2[0]:
+                                        if point1[1] == point2[1]:
+                                            print("These points are the same! You cannot find the slope between 1 point!")
+                                            continue
+                                        else:
+                                            print("The slope is undefined since the line is vertical.")
+                                            continue
+                                    slope = sp.Rational((point2[1] - point1[1]) , (point2[0] - point1[0]))
+                                    print(f"The slope is {slope}")
+                                else:
+                                    x1 = float(input("Enter x1: "))
+                                    y1 = float(input("Enter y1: "))
+                                    x2 = float(input("Enter x2: "))
+                                    y2 = float(input("Enter y2: "))
+                                    if x1 == x2:
+                                        if y1 == y2:
+                                            print("These points are the same! You cannot find the slope between 1 point!")
+                                            continue
+                                        else:
+                                            print("The slope is undefined since the line is vertical.")
+                                            continue
+                                    else:
+                                        slope = sp.Rational(y2 - y1) / sp.Rational(x2 - x1)
+                                        print(f"The slope is {slope}")
+                            elif choice == "2":
+                            #Find slope, multiply with x and subtract that from y to get b. Write final equation as y=mx+b... Give a little reminder saying they can convert the form using the other features of this calculator (the converting through forms one!!)
+                                points_form = input("This is the equation finder! Type 1 if you want to type your coordinates as an ordered pair: ")
+                                if points_form == "1":
+                                    point1 = ast.literal_eval(input("Enter first point (x,y): "))
+                                    point2 = ast.literal_eval(input("Enter second point (x1,y1): "))
+                                    if point1[0] == point2[0]:
+                                        if point1[1] == point2[1]:
+                                            print("These points are the same! You cannot find the equation between 1 point!")
+                                            continue
+                                        else:
+                                            print("The line is vertical, so the equation is x =", point1[0])
+                                            continue
+                                    else:
+                                        slope = sp.Rational((point2[1] - point1[1]) , (point2[0] - point1[0]))
+                                        b = sp.Rational(point1[1] - slope * point1[0])
+                                        if slope == 1:
+                                            slope_str = ""
+                                        elif slope == -1:
+                                            slope_str = "-"
+                                        else:
+                                            slope_str = str(slope)
+
+                                        if b == 0:
+                                            print(f"The equation of the line is y = {slope_str}x")
+                                        elif b < 0:
+                                            print(f"The equation of the line is y = {slope_str}x - {abs(b)}")
+                                        else:
+                                            print(f"The equation of the line is y = {slope_str}x + {b}")
+                                        """
+                                        if slope == 0: 
+                                            print(f"The equation of the line is y = {b}")
+                                        elif slope == 1:
+                                            if b == 0:
+                                                print(f"The equation of the line is y = x")
+                                            else:
+                                                print(f"The equation of the line is y = x + {b}")
+                                        elif b == 0:
+                                            print(f"The equation of the line is y = {slope}x")
+                                        elif b < 0:
+                                            print(f"The equation of the line is y = {slope}x - {abs(b)}")
+                                        else:
+                                            print(f"The equation of the line is y = {slope}x + {b}")
+                                        """
+                                        
+                                        
+                                    print("If you want your equation in a different form, you can use the other features of this calculator.")
+                                else:
+                                    x1 = float(input("Enter x1: "))
+                                    y1 = float(input("Enter y1: "))
+                                    x2 = float(input("Enter x2: "))
+                                    y2 = float(input("Enter y2: "))
+                                    if x1 == x2:
+                                        if y1 == y2:
+                                            print("These points are the same! You cannot find the equation between 1 point!")
+                                            continue
+                                        else:
+                                            print("The line is vertical, so the equation is x=", x1)
+                                            continue
+                                    slope = sp.Rational((y2 - y1), (x2 - x1))
+                                    b = sp.Rational(y1 - slope * x1)
+                                    if slope == 1:
+                                        slope_str = ""
+                                    elif slope == -1:
+                                        slope_str = "-"
+                                    else:
+                                        slope_str = str(slope)
+
+                                    if b == 0:
+                                        print(f"The equation of the line is y = {slope_str}x")
+                                    elif b < 0:
+                                        print(f"The equation of the line is y = {slope_str}x - {abs(b)}")
+                                    else:
+                                        print(f"The equation of the line is y = {slope_str}x + {b}")
+                                    print("If you want your equation in a different form, you can use the other features of this calculator.")
+                                    
+                            elif choice == "3":
+                                #Will use solving for y given some equation!!! 
+                                print("welcome to the features of a linear equation finder! Give your equation, and we will identify the slope (m) and y-intercept (0,b) of the line.")
+                                equation = input("Enter your linear equation (it can be in any form!): ")
+                                if "=" not in equation:
+                                    print("Equation must contain an '=' sign.")
+                                    continue
+                                if "y" in equation:
+                                    x, y = sp.symbols("x y")
+                                    left, right = equation.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left,local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right,local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr), y)[0]
+                                    slope = solution.coeff(x)
+                                    y_intercept = solution.subs(x, 0)
+                                    print("Slope:", slope)
+                                    print(f"Y-intercept: (0,{y_intercept})")
+                            
+
+                                else:
+                                    x, y = sp.symbols("x y")
+                                    left, right = equation.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr), x)[0]
+                                    
+                                    print("Slope: undefined")
+                                    print("Y-intercept: not a single point")
+                                
+                            elif choice == "4":
+                                #Possible strategy-- expand and bring all to one side! 
+                                print("Welcome to the equation converter. You may convert any equation (LINEAR) to point-slope form, slope-intercept form, or standard form.")
+                                user_input = input("Enter your equation: ")
+                                if "=" not in user_input:
+                                    print("Equation must contain an '=' sign.")
+                                    continue
+                                conversion = input("Do you want to convert to point-slope (1), slope-intercept (2), or standard form (3)? ")
+                                if conversion == "1": 
+                                    if "y" not in user_input:
+                                        print("Error: The equation does not contain 'y' Vertical lines cannot be in point-slope form!")
+                                        continue
+                                    x, y = sp.symbols("x y")
+                                    point = ast.literal_eval(input("Enter a point (x,y) that lies on your line: "))
+                                    left, right = user_input.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr),y)[0] 
+                                    slope = solution.coeff(x)
+                                    if left_expr.subs({x: point[0], y: point[1]}) == right_expr.subs({x: point[0], y: point[1]}):
+                                        x1 = point[0]
+                                        y1 = point[1]
+                                        if x1>0:
+                                            x_sign = "-"+str(x1)
+                                        elif x1 ==0:
+                                            x_sign = ""
+                                        else:
+                                            x_sign = "+"+str(abs(x1)) 
+                                        if y1>0:
+                                            y_sign = "-"+str(y1)
+                                        elif y1 ==0:
+                                            y_sign = ""
+                                        else:
+                                            y_sign = "+"+str(abs(y1)) 
+                                        
+                                        if slope == 1:
+                                            slope_str = ""
+                                        elif slope == -1:
+                                            slope_str = "-"
+                                        else:
+                                            slope_str = str(slope)
+                                        print(f"Point-slope form: y{y_sign} = {slope_str}(x{x_sign})")
+                                    else:
+                                        print("Error: The point does not lie on the line.")
+                                elif conversion == "2":
+                                    if "y" not in user_input:
+                                        print("Error: The equation does not contain 'y' Vertical lines cannot be in slope-intercept form!")
+                                        continue
+                                    x, y = sp.symbols("x y")
+                                    left, right = user_input.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr), y)[0]
+                                    slope = solution.coeff(x)
+                                    y_intercept = solution.subs(x, 0)
+                                    if slope == 0:
+                                        print(f"Slope-intercept form: y = {y_intercept}")
+                                        continue
+                                    elif slope == 1:
+                                        slope_str = "x"
+                                    elif slope == -1:
+                                        slope_str = "-x"
+                                    else:
+                                        slope_str = str(slope) + "x"
+                                    
+                                    if y_intercept == 0:
+                                        print(f"Slope-intercept form: y = {slope_str}")
+                                    elif y_intercept < 0:
+                                        print(f"Slope-intercept form: y = {slope_str} - {abs(y_intercept)}")
+                                    else:
+                                        print(f"Slope-intercept form: y = {slope_str} + {y_intercept}")
+                                elif conversion == "3":
+                                    if "y" in user_input:
+                                        x, y = sp.symbols("x y")
+                                        left, right = user_input.split("=", 1)
+                                        transformations = standard_transformations + (implicit_multiplication_application,)
+                                        lhs = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        rhs = parse_expr(right,local_dict={"x": x, "y": y}, transformations=transformations)
+                                        equation_expanded = sp.expand(lhs - rhs)
+                                        A = equation_expanded.coeff(x)
+                                        B = equation_expanded.coeff(y)
+                                        C = -equation_expanded.subs({x: 0, y: 0})
+                                        lcm = math.lcm(A.as_numer_denom()[1], B.as_numer_denom()[1], C.as_numer_denom()[1])
+                                        A = A * lcm
+                                        B = B * lcm
+                                        C = C * lcm
+                                        gcd = math.gcd(int(A), int(B), int(C))
+
+                                        if gcd != 0:
+                                            A = A // gcd
+                                            B = B // gcd
+                                            C = C // gcd
+                                        if A < 0 or (A == 0 and B < 0):
+                                            A = -A
+                                            B = -B
+                                            C = -C
+                                        if A == 1:
+                                            a_text = "x"
+                                        elif A == 0:
+                                            a_text = ""
+                                        else:
+                                            a_text = str(A)+"x"
+                                        if B == 0:
+                                            b_text = ""
+                                        elif A == 0:
+                                            if B == 1:
+                                                b_text = "y"
+                                            else:
+                                                b_text = f"{B}y"
+                                        elif B == 1:
+                                            b_text = "+y"
+                                        elif B == -1:
+                                            b_text = "-y"
+                                        elif B > 0:
+                                            b_text = "+" + str(B) + "y"
+                                        else:
+                                            b_text = str(B) + "y"
+                                        c_text = str(C) 
+                                        print(f"Standard form: {a_text}{b_text} = {c_text}")
+                                    else:
+                                        x, y = sp.symbols("x y")
+                                        left, right = user_input.split("=", 1)
+                                        transformations = standard_transformations + (implicit_multiplication_application,)
+                                        left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        right_expr = parse_expr(right,local_dict={"x": x, "y": y}, transformations=transformations)
+                                        solution = sp.solve(sp.Eq(left_expr, right_expr), x)[0]
+                                        print(f"Standard form: x={solution} ")
+                                else:
+                                    print("Invalid choice.")
+                            elif choice == "5":
+                                print("Give your line's equation (any form). Then give an input, and this will tell you the output! ")
+                                equation = input("Enter your linear equation (any form): ")
+                                xval = float(input("Enter the value of x (your input): "))
+                                if "=" not in equation:
+                                    print("Equation must contain an '=' sign.")
+                                    continue
+                                if "y" not in equation:
+                                    print("Must contain y in the equation. Equation in form x=b does does not define y as a function of x. ")
+                                    continue
+                                x, y = sp.symbols("x y")
+                                left, right = equation.split("=", 1)
+                                transformations = standard_transformations + (implicit_multiplication_application,)
+                                left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                solution = sp.solve(sp.Eq(left_expr, right_expr), y)[0]
+                                slope = solution.coeff(x)
+                                y_intercept = solution.subs(x, 0)
+                                output = slope*(xval)+y_intercept
+                                print(f"Output: {output}")
+                                
+                            elif choice == "6":
+                                print("Give your line's equation (any form). Then give an output, and this will tell you the input x! ")
+                                equation = input("Enter your linear equation (any form): ")
+                                yval = float(input("Enter the value of y (the output): "))
+                                if "=" not in equation:
+                                    print("Equation must contain an '=' sign.")
+                                    continue
+                                if "y" not in equation:
+                                    print("Must contain y in the equation. Equation in form x=b does does not define y as a function of x. ")
+                                    continue
+                                x, y = sp.symbols("x y")
+                                left, right = equation.split("=", 1)
+                                transformations = standard_transformations + (implicit_multiplication_application,)
+                                left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                solution = sp.solve(sp.Eq(left_expr, right_expr), y)[0]
+                                slope = solution.coeff(x)
+                                y_intercept = solution.subs(x, 0)
+                                if slope == 0:
+                                    print("Slope is zero, cannot solve for x.")
+                                    continue
+                                input_x = (yval - y_intercept) / slope
+                                print(f"Input x: {input_x}")
+                            elif choice == "7":
+                                #Will use solving for y given some equation!!! 
+                                print("welcome to the distance between parallel lines!")
+                                equation1 = input("Enter your linear equation (it can be in any form!): ")
+                                if "=" not in equation1:
+                                    print("Equation must contain an '=' sign.")
+                                    continue
+                                if "y" in equation1:
+                                    x, y = sp.symbols("x y")
+                                    is_vertical1 = False
+                                    left, right = equation1.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr),y)[0]
+                                    slope1 = solution.coeff(x)
+                                    y_intercept1 = solution.subs(x, 0)
+                                    
+                                    
+                                else:
+                                    x, y = sp.symbols("x y")
+                                    is_vertical1 = True
+                                    left, right = equation1.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr), x)[0]
+                                    slope1 = "--"
+                                    x_intercept1 = solution
+                                equation2 = input("Enter your linear equation (it can be in any form!): ")
+                                if "=" not in equation2:
+                                    print("Equation must contain an '=' sign.")
+                                    continue
+                                if "y" in equation2:
+                                    x, y = sp.symbols("x y")
+                                    is_vertical2 = False
+                                    left, right = equation2.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr), y)[0]
+                                    slope2 = solution.coeff(x)
+                                    y_intercept2 = solution.subs(x, 0)
+                                    
+                                else:
+                                    is_vertical2 = True
+                                    left, right = equation2.split("=", 1)
+                                    transformations = standard_transformations + (implicit_multiplication_application,)
+                                    left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                    solution = sp.solve(sp.Eq(left_expr, right_expr), x)[0]
+                                    slope2 = "--"
+                                    x_intercept2 = solution
+                                if slope1 != slope2: 
+                                    print("The lines are not parallel! Their distance keep changing!")
+
+                                elif is_vertical1 and is_vertical2:
+                                    print(f"The distance between the parallel vertical lines is {abs(x_intercept2 - x_intercept1)}.")
+                                else:
+                                    distance = abs(y_intercept2 - y_intercept1) / sp.sqrt(1 + slope1**2)
+                                    print(f"The distance between the parallel lines is {distance}.")
+                                    print(f" Distance rounded to the nearest thousandth: {float(distance):.3f}")
+                                    
+                                
+                            elif choice == "8":
+                                #So... Convert to mx+b, get the slope, and do stuff to find out! Ask whether they wanna enter points and then figure, or equations! 
+                                rep = input("Do you want to enter points(1) or equations(2)? (1 or 2): ")
+                                if rep == "1":
+                                    point1 = ast.literal_eval(input("Enter first point for line 1 (x,y): "))
+                                    point2 = ast.literal_eval(input("Enter second point for line 1 (x1,y1): "))
+                                    point3 = ast.literal_eval(input("Enter first point for line 2 (x,y): "))
+                                    point4 = ast.literal_eval(input("Enter second point for line 2 (x1,y1): "))
+                                    if point1[0] == point2[0]:
+                                        if point1[1] == point2[1]:
+                                            print("These points are the same!")
+                                            continue
+                                        else:
+                                            is_vertical1 = True
+                                            slope1 = "--"
+                                            
+                                    else:
+                                        slope1 = sp.Rational((point2[1] - point1[1]) , (point2[0] - point1[0]))
+                                    if point3[0] == point4[0]:
+                                        if point3[1] == point4[1]:
+                                            print("These points are the same!")
+                                            continue
+                                        else:
+                                            is_vertical2 = True 
+                                            slope2 = "--"    
+                                    else:
+                                        slope2 = sp.Rational((point4[1] - point3[1]) , (point4[0] - point3[0])) 
+                                        
+
+
+                                    if slope1 == slope2:
+                                        print("The lines are parallel.")
+                                    
+                                    elif slope1 == 0 and slope2 == "--":
+                                        print("The lines are perpendicular.")
+                                    elif slope1 == "--" and slope2 == 0:
+                                        print("The lines are perpendicular.")
+
+                                    elif slope1 != "--" and slope2 != "--" and slope1 * slope2 == -1:
+                                        print("The lines are perpendicular.")
+                                    else:
+                                        print("The lines are neither parallel nor perpendicular.")
+                                                
+                                elif rep == "2":
+                                    eq1 = input("Enter the first equation in the form (any form okay!): ")
+                                    eq2 = input("Enter the second equation in the form (any form okay!): ")
+                                    if "=" not in eq1:
+                                        print("Equation must contain an '=' sign.")
+                                        continue
+                                    if "=" not in eq2:
+                                        print("Equation must contain an '=' sign.")
+                                        continue
+                                    x, y = sp.symbols("x y")
+                                    if "y" in eq1:
+                                        left, right = eq1.split("=", 1)
+                                        transformations = standard_transformations + (implicit_multiplication_application,)
+                                        left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        solution = sp.solve(sp.Eq(left_expr, right_expr), y)[0]
+                                        slope1 = solution.coeff(x)
+                                    else:
+                                        left, right = eq1.split("=", 1)
+                                        transformations = standard_transformations + (implicit_multiplication_application,)
+                                        left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        solution = sp.solve(sp.Eq(left_expr, right_expr),x)[0]
+                                        slope1 = "--"
+
+                                    if "y" in eq2:
+                                        left, right = eq2.split("=", 1)
+                                        left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        solution = sp.solve(sp.Eq(left_expr, right_expr), y)[0]
+                                        slope2 = solution.coeff(x)
+                                    else:
+                                        left, right = eq2.split("=", 1)
+                                        left_expr = parse_expr(left, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        right_expr = parse_expr(right, local_dict={"x": x, "y": y}, transformations=transformations)
+                                        solution = sp.solve(sp.Eq(left_expr, right_expr),x)[0]
+                                        slope2 = "--"
+
+                                    if slope1 == slope2:
+                                        print("The lines are parallel.")
+                                    
+                                    elif slope1 == 0 and slope2 == "--":
+                                        print("The lines are perpendicular.")
+                                    elif slope1 == "--" and slope2 == 0:
+                                        print("The lines are perpendicular.")
+                                    elif slope1 != "--" and slope2 != "--" and slope1 * slope2 == -1:
+                                        print("The lines are perpendicular.")
+                                    else:
+                                        print("The lines are neither parallel nor perpendicular.")
+
+                                else:
+                                    print("Invalid choice.")
+                            else:
+                                print("Invalid choice, please try again.")
+                        except Exception as e:
+                            print(f"An error occurred: {e}")  
+                            
+                elif choice == "3":
+                    pass
+                elif choice == "4":
+                    pass
+                else:
+                    print("Invalid choice, please try again.")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+    elif the_choice == "3":
+        pass  
+    elif the_choice == "4":
+        pass 
+    elif the_choice == "5":
+        pass 
